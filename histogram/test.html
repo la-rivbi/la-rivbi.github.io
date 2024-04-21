@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>la rivbi's Histogram Tool</title>
+  <link href="styles.css" rel="stylesheet" />
+  <script src="https://cdn.plot.ly/plotly-2.31.1.min.js" charset="utf-8"></script>
+</head>
+
+<body>
+
+<script src="declarations.js"></script>
+<script src="load_test_responses.js"></script>
+
+<h1>la rivbi's Histogram Tool</h1>
+<!--<h2>For Eleven Words of Wisdom Round 1</h2>-->
+<h2>For Testing Purposes Only (Using OCR 1.1 data for EWOW 1)</h2>
+
+<div id="tester" class="center"></div>
+
+
+<p id="query_area" class="center">
+	<div class="text_center">
+		<label for="parameter">Parameter to query:</label>
+		<input type="text" id="parameter" name="parameter" size=40 />
+	</div>
+	<div class="text_center">
+		<label for="num-min">For numeric parameters only: start:</label>
+		<input type="number" id="num-min" name="num-min" size=5 />
+		<label for="num-step">step:</label>
+		<input type="number" id="num-step" name="num-step" size=5 />
+		<label for="num-step">end:</label>
+		<input type="number" id="num-max" name="num-max" size=5 />
+	</div>
+	<div class="text_center">
+		<button id="query_button" type="button" class="center">Query!</button>
+		<button id="recolor_button" type="button" class="center">Recolor Histogram</button>
+	</div>
+</p>
+<p id="temp"></p>
+
+<table class = "center">
+  <thead>
+    <tr>
+      <th scope="col">Category</th>
+      <th scope="col">Count</th>
+      <th scope="col">Average</th>
+      <th scope="col"># -1 Life</th>
+      <th scope="col"># Safe</th>
+      <th scope="col"># +1 Life</th>
+      <th scope="col">% -1 Life</th>
+      <th scope="col">% Safe</th>
+      <th scope="col">% +1 Life</th>
+      <th scope="col">Color</th>
+    </tr>
+  </thead>
+  <tbody id="categories">
+  </tbody>
+  <tfoot>
+    <!-- These values are hardcoded -->
+    <tr>
+      <th scope="row">Overall</th>
+      <td class="footer-gen-info">16607</td>
+      <td class="footer-gen-info">50.16%</td>
+      <td class="footer-death">8137</td>
+      <td class="footer-safe">7640</td>
+      <td class="footer-prize">830</td>
+      <td class="footer-death">49.00%</td>
+      <td class="footer-safe">46.00%</td>
+      <td class="footer-prize">5.00%</td>
+      <td class="footer-safe text_center">None</td>
+    </tr>
+  </tfoot>
+
+<script src="queries.js"></script>
+</body>
+</html>
