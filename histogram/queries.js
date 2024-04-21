@@ -84,15 +84,17 @@ let digits = "1234567890";
 let letters = uppercase + lowercase;
 let alnum = letters + digits;
 
+// These variables are needed when recolor() is called.
+// Their value will be set by myFunction() below.
 let num_start = 0;
 let num_step = 0;
 let num_end = 0;
+let idx_list = [];
 
 function recolor() {
-  let data = [];
-  for(i = 0; i < Object.keys(traces).length; i++){
-  	let idx = Object.keys(traces)[i];
-  	if(Object.keys(traces).includes(idx)){
+    let data = [];
+    for(i = 0; i < idx_list.length; i++){
+  		let idx = idx_list[i];
 		let my_trace = traces[idx];
 		let group_name = get_group_name(idx, num_start, num_step, num_end);
   		let group_color = document.getElementById("group_" + idx).value;
@@ -111,9 +113,8 @@ function recolor() {
   		};
   		data.push(new_trace);
 	}
-  }
-  let layout = {barmode: "stack"};
-  Plotly.newPlot(TESTER, data, layout);
+    let layout = {barmode: "stack"};
+    Plotly.newPlot(TESTER, data, layout);
 }
 
 let traces = {};
@@ -127,6 +128,7 @@ function myFunction() {
   death_count = {};
   safe_count = {};
   prize_count = {};
+  idx_list = [];
   num_start = num_start_box.value;
   num_step = num_step_box.value;
   num_end = num_end_box.value;
@@ -184,6 +186,7 @@ function myFunction() {
   for(i = 0; i < candidates.length; i++){
   	idx = candidates[i];
   	if(Object.keys(traces).includes(idx)){
+		idx_list.push(idx);
 		let bar_color = "#" + (bar_r * 65536 + bar_g * 256 + bar_b).toString(16).padStart(6, '0');
 		let my_trace = traces[idx];
 		let group_name = get_group_name(idx, num_start, num_step, num_end);

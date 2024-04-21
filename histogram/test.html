@@ -19,11 +19,20 @@
 
 <div id="tester" class="center"></div>
 
+<p id="instruction-1" class="text_center">
+Enter a javascript expression into the textbox below, and click "Query!" to generate a histogram.
+</p>
+<p id="instruction-2" class="text_center">
+In the expression, the response itself is represented with the variable "entry". 
+</p>
+<p id="instruction-3" class="text_center">
+You can select the colors from the table and click "Recolor Histogram" to change the colors of the bars. 
+</p>
 
 <p id="query_area" class="center">
 	<div class="text_center">
 		<label for="parameter">Parameter to query:</label>
-		<input type="text" id="parameter" name="parameter" size=40 />
+		<input type="text" id="parameter" name="parameter" value="entry.length >= 50" size=40 />
 	</div>
 	<div class="text_center">
 		<label for="num-min">For numeric parameters only: start:</label>
