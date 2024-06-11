@@ -60,3 +60,10 @@ th {
 	text-align: center;
 }
 
+.text_td {
+	text-align: left;
+	font-family: sans-serif;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+

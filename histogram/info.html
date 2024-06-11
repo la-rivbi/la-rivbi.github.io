@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>la rivbi's Histogram Tool</title>
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <h1>la rivbi's Histogram Tool</h1>  
+	<p class="text_center">
+	Hello! This is a short usage explanation for my histogram tool. Since I don't know how to write a documentation, I'll provide some examples instead.
+	<!--I believe the examples I give are the most common use cases.-->
+	</p>
+	<table>
+	<tr>
+		<th>Query</th> <th>Effect</th> <th>Notes</th>
+	</tr>
+	<tr>
+		<td>entry.at(0) == "A"</td>
+		<td class="text_td">Generate a histogram based on whether the response starts with the character "A".</td>
+		<td class="text_td"></td>
+	</tr>
+	<tr>
+		<td>entry.at(-1) == "!"</td>
+		<td class="text_td">Generate a histogram based on whether the response ends with an exclamation mark.</td>
+		<td class="text_td"></td>
+	</tr>
+	<tr>
+		<td>get_words(entry).includes("WORD")</td>
+		<td class="text_td">Generate a histogram based on whether the response contains the word "WORD".</td>
+		<td class="text_td">You should type the target word in all caps for the query to work.</td>
+	</tr>
+	<tr>
+		<td>get_words(entry).at(0) == "WORD"</td>
+		<td class="text_td">Generate a histogram based on whether the response starts with the word "WORD".</td>
+		<td class="text_td">You should type the target word in all caps for the query to work.</td>
+	</tr>
+	<tr>
+		<td>get_words(entry).at(-1) == "WORD"</td>
+		<td class="text_td">Generate a histogram based on whether the response ends with the word "WORD".</td>
+		<td class="text_td">You should type the target word in all caps for the query to work.</td>
+	</tr>
+	<tr>
+		<td>get_words_count(entry) == 11</td>
+		<td class="text_td">Generate a histogram based on whether the response contains exactly 11 words.</td>
+		<td class="text_td">Note that this tools count words differently from the official method, so there may be some discrepancy in results.
+		Also because of the way javasctipt's split() works, zero-worders are counted as having one word.</td>
+	</tr>
+	<tr>
+		<td>get_words_count(entry) &gt; 11</td>
+		<td class="text_td">Generate a histogram based on whether the response contains more than 11 words.</td>
+		<td class="text_td">See above.</td>
+	</tr>
+	<tr>
+		<td>uppercase.includes(entry.at(0))</td>
+		<td class="text_td">Generate a histogram based on whether the response starts with an uppercase letter.</td>
+		<td class="text_td">I defined the string "uppercase" to be "QWERTYUIOPASDFGHJKLZXCVBNM". I also defined lowercase, digits, letters and alnum, so you can use them too.</td>
+	</tr>
+	<tr>
+		<td>entry.toUpperCase().includes("TARGET PHRASE")</td>
+		<td class="text_td">Generate a histogram based on whether the response contains "TARGET PHRASE" as its substring, case insensitive.</td>
+		<td class="text_td">See above; Equivalent to the method Cary used for "responses containing WORD" in his video. </td>
+	</tr>
+	<tr>
+		<td>entry.length</td>
+		<td class="text_td">Generate a histogram based on the number of characters in the response.</td>
+		<td class="text_td">Since this expression returns a number, you have to fill out the "start", "step" and "end" below the input box for the query to work.</td>
+	</tr>
+	<tr>
+		<td>get_words_count(entry)</td>
+		<td class="text_td">Generate a histogram based on the number of words in the response.</td>
+		<td class="text_td">See above for explanations for get_words_count() and querying with expression returning a number.</td>
+	</tr>
+	<tr>
+		<td>entry.at(0)</td>
+		<td class="text_td">Generate a histogram based on the first character in the response.</td>
+		<td class="text_td">The result may be a little messy...</td>
+	</tr>
+	</table>
+  </body>
+</html>
