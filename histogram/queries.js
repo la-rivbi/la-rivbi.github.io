@@ -52,6 +52,15 @@ function get_words(entry){
 	return entry.replace(/[^0-9a-z ]/gi, '').toUpperCase().trim().replace(/\s{2,}/g, ' ').split(" ");
 }
 
+function get_acronym(entry){
+	words = get_words(entry)
+	result = ""
+	for (i = 0; i < words.length; i++){
+		result += words[i].at(0)
+	}
+	return result
+}
+
 function get_words_count(entry){
 	return get_words(entry).length;
 }

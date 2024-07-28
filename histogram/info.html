@@ -64,6 +64,10 @@
 		<td class="text_td">Equivalent to the method Cary used for "responses containing WORD" in his video. </td>
 	</tr>
 	<tr>
+		<td>get_acronym(entry) == "WORD"</td>
+		<td class="text_td">Generate a histogram based on whether the response acronymizes to "WORD".</td>
+		<td class="text_td">This tool counts alphanumeric characters differently from the official method, so there may be some discrepancy in results. </td>
+	<tr>
 		<td>entry.length</td>
 		<td class="text_td">Generate a histogram based on the number of characters in the response.</td>
 		<td class="text_td">Since this expression returns a number, you have to fill out the "start", "step" and "end" below the input box for the query to work.</td>
@@ -79,5 +83,9 @@
 		<td class="text_td">The result may be a little messy...</td>
 	</tr>
 	</table>
+	<p class="text_center">
+	Also: When writing code in javascript console (for example, you want the tool to print out the responses you queried), DO NOT USE "i" AS LOOPING VARIABLE! It'll clash with the internal loop variable in the tool and result in an infinite loop.
+	</p>
   </body>
 </html>
+
