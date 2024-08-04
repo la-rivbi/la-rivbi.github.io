@@ -68,6 +68,11 @@
 		<td class="text_td">Generate a histogram based on whether the response acronymizes to "WORD".</td>
 		<td class="text_td">This tool counts alphanumeric characters differently from the official method, so there may be some discrepancy in results. </td>
 	<tr>
+	<tr>
+		<td>/REGEX_PATTERN/.test(entry)</td>
+		<td class="text_td">Generate a histogram based on whether the response contains a match to the regex pattern REGEX_PATTERN.</td>
+		<td class="text_td">For example, <code>/\..*,.*!/.test(entry)</code> will generate a histogram based on whether the response is minitwow-formatted (<code>. , !</code>). </td>
+	<tr>
 		<td>entry.length</td>
 		<td class="text_td">Generate a histogram based on the number of characters in the response.</td>
 		<td class="text_td">Since this expression returns a number, you have to fill out the "start", "step" and "end" below the input box for the query to work.</td>
