@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>la rivbi's Alumni Prediction Tool</title>
+  <link href="styles.css" rel="stylesheet" />
+</head>
+
+<body>
+
+<script src="declarations.js"></script>
+<script src="load-5b.js"></script>
+<h1>la rivbi's EWOWlumni Prediction Tool</h1>
+
+<h2 id="counter">0 Contestants assessed</h2>
+
+<table class = "center">
+  <thead>
+    <tr>
+      <th scope="col">Lives</th>
+      <th scope="col">1</th>
+      <th scope="col">2</th>
+      <th scope="col">3</th>
+      <th scope="col">4</th>
+      <th scope="col">5</th>
+      <th scope="col">6</th>
+      <th scope="col">7</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"> # assessed</th>
+      <td id = "1_assessed" class = "number"></td>
+      <td id = "2_assessed" class = "number"></td>
+      <td id = "3_assessed" class = "number"></td>
+      <td id = "4_assessed" class = "number"></td>
+      <td id = "5_assessed" class = "number"></td>
+      <td id = "6_assessed" class = "number"></td>
+      <td id = "7_assessed" class = "number"></td>
+    </tr>
+    <tr>
+      <th scope="row"> # total</th>
+      <td id = "1_total" class = "number"></td>
+      <td id = "2_total" class = "number"></td>
+      <td id = "3_total" class = "number"></td>
+      <td id = "4_total" class = "number"></td>
+      <td id = "5_total" class = "number"></td>
+      <td id = "6_total" class = "number"></td>
+      <td id = "7_total" class = "number"></td>
+    </tr>
+  </tbody>
+</table>
+
+<table class = "center">
+  <thead>
+    <tr>
+      <th scope="col">0</th>
+      <th scope="col">1</th>
+      <th scope="col">2</th>
+      <th scope="col">3</th>
+      <th scope="col">4</th>
+      <th scope="col">5</th>
+      <th scope="col">6</th>
+      <th scope="col">7</th>
+      <th scope="col">8</th>
+      <th scope="col">9</th>
+      <th scope="col">10</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id = "0_given" class="number"></td>
+      <td id = "1_given" class="number"></td>
+      <td id = "2_given" class="number"></td>
+      <td id = "3_given" class="number"></td>
+      <td id = "4_given" class="number"></td>
+      <td id = "5_given" class="number"></td>
+      <td id = "6_given" class="number"></td>
+      <td id = "7_given" class="number"></td>
+      <td id = "8_given" class="number"></td>
+      <td id = "9_given" class="number"></td>
+      <td id = "10_given" class="number"></td>
+    </tr>
+  </tbody>
+</table>
+
+<table class = "center">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Response</th>
+    </tr>
+  </thead>
+  <tbody id="responses">
+    <tr>
+      <th scope="row">EWOW 1</th>
+      <td id="response1"></td>
+    </tr>
+    <tr>
+      <th scope="row">EWOW 2</th>
+      <td id="response2"></td>
+    </tr>
+    <tr>
+      <th scope="row">EWOW 3</th>
+      <td id="response3"></td>
+    </tr>
+    <tr>
+      <th scope="row">EWOW 4</th>
+      <td id="response4"></td>
+    </tr>
+    <tr>
+      <th scope="row">EWOW 5</th>
+      <td id="response5"></td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="lives" class="text_center">Current Lives: 0</h2>
+<p id="question" class="text_center">
+On the scale of 0 to 10, how likely do you think <br> this contestant will make it into alumni (final 128)?
+</p>
+<p id="question-2" class="text_center">
+(0 = Definitely not; 10 = Definitely)
+</p>
+<p id="query_area" class="center">
+	<div class="text_center">
+		<button id="0_button" type="button" class="center">0</button>
+		<button id="1_button" type="button" class="center">1</button>
+		<button id="2_button" type="button" class="center">2</button>
+		<button id="3_button" type="button" class="center">3</button>
+		<button id="4_button" type="button" class="center">4</button>
+		<button id="5_button" type="button" class="center">5</button>
+		<button id="6_button" type="button" class="center">6</button>
+		<button id="7_button" type="button" class="center">7</button>
+		<button id="8_button" type="button" class="center">8</button>
+		<button id="9_button" type="button" class="center">9</button>
+		<button id="10_button" type="button" class="center">10</button>
+	</div>
+</p>
+<p id="functions_area" class="center">
+	<div class="text_center">
+		<button id="save_button" type="button" class="center">Save my progress to clipboard</button>
+		<button id="load_button" type="button" class="center">Load my saved progress</button>
+	</div>
+</p>
+<p id="end_area" class="center">
+	<div class="text_center">
+		<button id="end_button" type="button" class="center">I think I've seen everyone that can alumni</button>
+	</div>
+</p>
+
+<table id="result" class = "center">
+</table>
+
+
+<script src="main.js"></script>
+
+</body>
+</html>
