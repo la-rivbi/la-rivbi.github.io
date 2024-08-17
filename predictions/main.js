@@ -1,12 +1,12 @@
 alert(`
-Hello! This is a tool that helps you the make EWOWlumni prediction
-(that is based purely on response quality).
+Hello! This is a tool that helps you make EWOWlumni predictions
+that is based purely on response quality.
 
 How to use:
 It's simple: You'll be presented with a contestant's EWOW responses
 and their current amount of lives. Judge how likely the contestant
 will make it into the final 128, and answer by clicking the button
-labeled 0-10. Then you'll be presented with another contestant's
+labeled 0-10 below. Then you'll be presented with another contestant's
 data. Repeat until you think you've seen all possible EWOWlumni.
 Then, click "I think I've seen everyone that can alumni", then
 your prediction table wil be generated automatically!
