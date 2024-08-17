@@ -11,6 +11,11 @@ data. Repeat until you think you've seen all possible EWOWlumni.
 Then, click "I think I've seen everyone that can alumni", then
 your prediction table wil be generated automatically!
 
+The order of the contestants presented is by their performances so far,
+from best to worst (with some randomization). You'll see some 1 or 2-
+livers sprinkled here and there. I put them to prevent fatigue from
+seeing only good responses.
+
 Your prediction is the 128 contestants you gave the highest number
 (rating) to. Ties are broken by the amount of lives first, then
 by sum of relative rank. You can't see those in the prediction
