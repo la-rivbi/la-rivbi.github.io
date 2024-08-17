@@ -1,3 +1,30 @@
+alert(`
+Hello! This is a tool that helps you the make EWOWlumni prediction
+(that is based purely on response quality).
+
+How to use:
+It's simple: You'll be presented with a contestant's EWOW responses
+and their current amount of lives. Judge how likely the contestant
+will make it into the final 128, and answer by clicking the button
+labeled 0-10. Then you'll be presented with another contestant's
+data. Repeat until you think you've seen all possible EWOWlumni.
+Then, click "I think I've seen everyone that can alumni", then
+your prediction table wil be generated automatically!
+
+Your prediction is the 128 contestants you gave the highest number
+(rating) to. Ties are broken by the amount of lives first, then
+by sum of relative rank. You can't see those in the prediction
+table though; they are sorted by amount of lives first, then alpha-
+betically, just like in losered's prediction table.
+
+If you wish to do it in multiple sessions, you can click "Save my 
+progress to clipboard" to save your progress, and when you go to
+this page again, click "Load my saved progress", paste the text
+you recieved when saving, and you can start from where you've stopped.
+
+Happy predicting! You can ask me (la rivbi) for any questions.
+`);
+
 
 let response_cell = [];
 
