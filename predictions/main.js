@@ -177,6 +177,19 @@ color_list = [
 "#D6D3FF"
 ];
 
+function show_alumni_data(contestant_id){
+	let cc = contestants[contestant_id];
+	let text = "";
+	text += "Contestant Name: " + cc.name + "\n";
+	text += "Your Assessment: " + Math.floor(cc.chance) + "\n";
+	text += "Current Lives: " + cc.lives5 + "\n";
+	text += "Sum of Relative Ranks: " + cc.rr_sum * 100.0 + "%\n";
+	for(let i = 1; i <= 5; i++){
+		text += "EWOW " + i + " Response: " + cc["response" + i] + "\n";
+	}
+	alert(text);
+}
+
 function get_result(){
 	candidates.sort(result_sort_key);
 	alumni = []
@@ -193,8 +206,10 @@ function get_result(){
 			let new_text = document.createTextNode(contestants[alumni[r + c * 16]].name);
 			new_cell.appendChild(new_text);
 			new_cell.style.backgroundColor = color_list[contestants[alumni[r + c * 16]].lives5];
+			new_cell.addEventListener("click", function () {show_alumni_data(alumni[r + c * 16])});
 		}
 	}
+	document.getElementById("result_text").innerText = "Here's your EWOWlumni prediction! Click on a contestant to see their performances and responses.";
 }
 
 function reset_all(){
