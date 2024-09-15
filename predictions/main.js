@@ -30,10 +30,12 @@ you recieved when saving, and you can start from where you've stopped.
 Happy predicting! You can ask me (la rivbi) for any questions.
 `);
 
+let contestants = contestants_master.filter((c) => (c.get_current_lives() > 0));
+let max_lives = 8;
 
 let response_cell = [];
 
-for (let i = 1; i <= 5; i++){
+for (let i = 1; i <= total_eps; i++){
 	response_cell[i] = document.getElementById("response" + i);
 }
 
@@ -52,7 +54,7 @@ let lives_counters = [];
 let lives_total = [];
 let lives_counters_cell = [];
 let lives_total_cell = [];
-for (let i = 1; i <= 7; i++){
+for (let i = 1; i <= max_lives; i++){
 	lives_counters_cell[i] = document.getElementById(i + "_assessed");
 	lives_total_cell[i] = document.getElementById(i + "_total");
 	lives_counters[i] = 0;
@@ -60,7 +62,7 @@ for (let i = 1; i <= 7; i++){
 }
 
 function update_tables(){
-	for (let i = 1; i <= 7; i++){
+	for (let i = 1; i <= max_lives; i++){
 		lives_counters_cell[i].innerText = lives_counters[i];
 		lives_total_cell[i].innerText = lives_total[i];
 	}
@@ -83,30 +85,24 @@ for(let i = 0; i < contestants.length; i++){
 	if(contestants[i] != undefined){
 		let c = contestants[i];
 		relative_ranks = [];
-		rr_contestants = [0, 16607, 8623, 8062, 5626, 4016];
+		rr_contestants = [0, 16607, 8623, 8062, 5626, 4016, 2767];
 		rr_sum = 0
-		for (let ep = 1; ep <= 5; ep++){
+		for (let ep = 1; ep <= total_eps; ep++){
 			relative_ranks[ep - 1] = 1 - (c["rank" + ep] - 1) / (rr_contestants[ep] - 1);
 			rr_sum += relative_ranks[ep - 1]
 		}
 		relative_ranks.sort((a, b) => b - a); // sort in descending order
-		if (c.lives5 >= 7){
-			c.seedbase = 4700;
-		}else if (c.lives5 >= 6){
-			c.seedbase = 4700;
-		}else if (c.lives5 >= 5){
-			c.seedbase = 4600 + Math.max(0, (rr_sum - 3) * 50);
-		}else if (c.lives5 >= 4){
-			c.seedbase = 4300 + Math.max(0, (rr_sum - 3) * 250);
+		if (c.get_current_lives() >= 4){
+			c.seedbase = 4300 + Math.max(0, (rr_sum - total_eps + 2) * 250 * 5 / total_eps);
 		}else{
-			seed_1 = c.lives5 * 1000 // by lifes
+			seed_1 = c.get_current_lives() * 1000 // by lifes
 			seed_2 = 4300 + Math.min(relative_ranks[0] * 100 + relative_ranks[1] * 100 - 190, 0) * 50;
 			if(relative_ranks.at(-2) < 0){ // don't consider it if the contestant dnp'd at least twice
 				seed_2 = 0
 			}
 			seed_3 = 0
-			if (c.lives5 >= 3){
-				seed_3 = 3300 + (rr_sum - 3) * 750;
+			if (c.get_current_lives() >= 3){
+				seed_3 = 4000 + (rr_sum - total_eps + 3) * 1200 / total_eps;
 			}
 			seed_4 = 0 // added to avoid fatigue when assessing high-placement players
 			if(Math.random() < 0.02){
@@ -116,7 +112,7 @@ for(let i = 0; i < contestants.length; i++){
 		}
 		c.seed = c.seedbase + 150 * Math.random();
 		candidates.push(i);
-		lives_total[c.lives5]++;
+		lives_total[c.get_current_lives()]++;
 	}
 }
 
@@ -129,19 +125,19 @@ function get_candidate(){
 	if(new_candidate == undefined){
 		get_result();
 	}else{
-		for(let i = 1; i <= 5; i++){
+		for(let i = 1; i <= total_eps; i++){
 			response_cell[i].innerText = new_candidate["response" + i];
 		}
-		lives_cell.innerText = "This contestant have " + new_candidate["lives5"] + " live(s) currently.";
+		lives_cell.innerText = "This contestant have " + new_candidate.get_current_lives() + " live(s) currently.";
 	}
 	counter.innerText = current_idx + " contestants assessed";
 }
 
 function place_bet(bet){
 	let c = contestants[candidates[current_idx]];
-	c.chance = bet + 0.1 * c.lives5 + 0.001 * c.rr_sum;
+	c.chance = bet + 0.1 * c.get_current_lives() + 0.001 * c.rr_sum;
 	given_counters[bet]++;
-	lives_counters[c.lives5]++;
+	lives_counters[c.get_current_lives()]++;
 	update_tables();
 	current_idx++;
 	get_candidate();
@@ -150,7 +146,7 @@ function place_bet(bet){
 function result_sort_key(a, b){
 	let result = contestants[b].chance - contestants[a].chance;
 	if(result == 0){
-		result = contestants[b].lives5 - contestants[a].lives5;
+		result = contestants[b].get_current_lives() - contestants[a].get_current_lives();
 		if(result == 0){
 			result = contestants[b].rr_sum - contestants[a].rr_sum;
 		}
@@ -159,7 +155,7 @@ function result_sort_key(a, b){
 }
 
 function alumni_sort_key(a, b){
-	let result = contestants[b].lives5 - contestants[a].lives5;
+	let result = contestants[b].get_current_lives() - contestants[a].get_current_lives();
 	if(result == 0){
 		result = contestants[a].name.localeCompare(contestants[b].name, 'en', { sensitivity: 'base' });
 	}
@@ -174,7 +170,9 @@ color_list = [
 "#D2F3FB",
 "#D1E9FF",
 "#D3DFFF",
-"#D6D3FF"
+"#D6D3FF",
+"#DFCAFF",
+"#FFFFFF"
 ];
 
 function show_alumni_data(contestant_id){
@@ -182,9 +180,9 @@ function show_alumni_data(contestant_id){
 	let text = "";
 	text += "Contestant Name: " + cc.name + "\n";
 	text += "Your Assessment: " + Math.floor(cc.chance) + "\n";
-	text += "Current Lives: " + cc.lives5 + "\n";
+	text += "Current Lives: " + cc.get_current_lives() + "\n";
 	text += "Sum of Relative Ranks: " + cc.rr_sum * 100.0 + "%\n";
-	for(let i = 1; i <= 5; i++){
+	for(let i = 1; i <= total_eps; i++){
 		text += "EWOW " + i + " Response: " + cc["response" + i] + "\n";
 	}
 	alert(text);
@@ -205,7 +203,7 @@ function get_result(){
 			let new_cell = new_row.insertCell(-1);
 			let new_text = document.createTextNode(contestants[alumni[r + c * 16]].name);
 			new_cell.appendChild(new_text);
-			new_cell.style.backgroundColor = color_list[contestants[alumni[r + c * 16]].lives5];
+			new_cell.style.backgroundColor = color_list[contestants[alumni[r + c * 16]].get_current_lives()];
 			new_cell.addEventListener("click", function () {show_alumni_data(alumni[r + c * 16])});
 		}
 	}
@@ -216,7 +214,7 @@ function reset_all(){
 	for (let i = 0; i <= 10; i++){
 		given_counters[i] = 0;
 	}
-	for (let i = 1; i <= 7; i++){
+	for (let i = 1; i <= max_lives; i++){
 		lives_counters[i] = 0;
 		lives_total[i] = 0;
 	}
@@ -224,7 +222,7 @@ function reset_all(){
 		if(contestants[i] != undefined){
 			let c = contestants[i];
 			c.chance = 0;
-			lives_total[c.lives5]++;
+			lives_total[c.get_current_lives()]++;
 		}
 	}
 	current_idx = 0;
