@@ -16,6 +16,8 @@ function get_part(parts, idx, is_number = false){
 }
 
 let rr_contestants = [0, 16607, 8623, 8062, 5626, 4016, 2767];
+let prize_ranks = [0, 830, 431, 403, 281, 201, 138];
+let safe_ranks = [0, 8470, 4397, 4111, 2869, 2048, 1411];
 let total_eps = rr_contestants.length - 1;
 class Contestant {
 	constructor(str) {
