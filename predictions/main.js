@@ -1,31 +1,34 @@
-alert(`
-Hello! This is a tool that helps you make EWOWlumni predictions
+alert(`Hello! This is a tool that helps you make EWOWlumni predictions \
 that is based purely on response quality.
+ 
+How to use: 
+It's simple: You'll be presented with a contestant's EWOW responses \
+and their current amount of lives. Judge how likely the contestant \
+will make it into alumni, and answer by clicking the button \
+labeled 0-10 below. Then you'll be presented with another contestant's \
+data. Repeat until you think you've seen all possible EWOWlumni. \
+Then, click "I think I've seen everyone that can alumni", then \
+your prediction table wil be generated automatically! 
 
-How to use:
-It's simple: You'll be presented with a contestant's EWOW responses
-and their current amount of lives. Judge how likely the contestant
-will make it into the final 128, and answer by clicking the button
-labeled 0-10 below. Then you'll be presented with another contestant's
-data. Repeat until you think you've seen all possible EWOWlumni.
-Then, click "I think I've seen everyone that can alumni", then
-your prediction table wil be generated automatically!
+You can choose the number of EWOWlumnis you think there will be. \
+The default is 100, but you can choose any number between 80 and 128.
 
-The order of the contestants presented is by their performances so far,
-from best to worst (with some randomization). You'll see some 1 or 2-
-livers sprinkled here and there. I put them to prevent fatigue from
+The order of the contestants presented is by their performances so far, \
+from best to worst (with some randomization). You'll see some 1 or 2- \
+livers sprinkled here and there. I put them to prevent fatigue from \
 seeing only good responses.
 
-Your prediction is the 128 contestants you gave the highest number
-(rating) to. Ties are broken by the amount of lives first, then
-by sum of relative rank. You can't see those in the prediction
-table though; they are sorted by amount of lives first, then alpha-
-betically, just like in losered's prediction table.
+Your prediction is the contestants you gave the highest number \
+(rating) to. Ties are broken by the amount of lives first, then \
+by sum of relative rank. You can't see those in the prediction \
+table though; they are sorted by amount of lives first, then alphabetically, just like in losered's prediction table.
 
-If you wish to do it in multiple sessions, you can click "Save my 
-progress to clipboard" to save your progress, and when you go to
-this page again, click "Load my saved progress", paste the text
-you recieved when saving, and you can start from where you've stopped.
+If you wish to do it in multiple sessions, you can click "Save my \
+progress to clipboard" to save your progress, and when you go to \
+this page again, click "Load my saved progress", paste the text \
+you recieved when saving, and you can start from where you've stopped. \
+The number of EWOWlumni isn't saved though, you will have to save \
+it by yourself. It's just a number, right?
 
 Happy predicting! You can ask me (la rivbi) for any questions.
 `);
@@ -190,8 +193,9 @@ function show_alumni_data(contestant_id){
 
 function get_result(){
 	candidates.sort(result_sort_key);
+	let alumni_count = document.getElementById("alumni_count").value;
 	alumni = []
-	for(let i = 0; i < 128; i++){
+	for(let i = 0; i < alumni_count; i++){
 		alumni.push(candidates[i]);
 	}
 	alumni.sort(alumni_sort_key)
@@ -201,10 +205,14 @@ function get_result(){
 		let new_row = result_table.insertRow(-1);
 		for(let c = 0; c < 8; c ++){
 			let new_cell = new_row.insertCell(-1);
-			let new_text = document.createTextNode(contestants[alumni[r + c * 16]].name);
-			new_cell.appendChild(new_text);
-			new_cell.style.backgroundColor = color_list[contestants[alumni[r + c * 16]].get_current_lives()];
-			new_cell.addEventListener("click", function () {show_alumni_data(alumni[r + c * 16])});
+			if (r + c * 16 < alumni_count){
+				let new_text = document.createTextNode(contestants[alumni[r + c * 16]].name);
+				new_cell.appendChild(new_text);
+				new_cell.style.backgroundColor = color_list[contestants[alumni[r + c * 16]].get_current_lives()];
+				new_cell.addEventListener("click", function () {show_alumni_data(alumni[r + c * 16])});
+			} else {
+				new_cell.style.backgroundColor = "#CCCCCC";
+			}
 		}
 	}
 	document.getElementById("result_text").innerText = "Here's your EWOWlumni prediction! Click on a contestant to see their performances and responses.";

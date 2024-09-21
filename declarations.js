@@ -33,6 +33,7 @@ class Contestant {
 			this["vote_count" + i] = get_part(parts, i * 7, true);
 			this["rank" + i] = get_part(parts, i * 7 + 1, true);
 			this["lives" + i] = get_part(parts, i * 7 + 2, true);
+			this["rr" + i] = 1 - (this["rank" + i] - 1) / (rr_contestants[i] - 1);
 		}
 		this.chance = 0.0;
 		this.seed = undefined;
@@ -40,8 +41,10 @@ class Contestant {
 		let rr_sum = 0;
 		let relative_ranks = [];
 		for (let ep = 1; ep <= total_eps; ep++){
-			relative_ranks[ep - 1] = 1 - (this["rank" + ep] - 1) / (rr_contestants[ep] - 1);
-			rr_sum += relative_ranks[ep - 1]
+			if(this["rank" + ep] < rr_contestants[ep] + 1){ // the contestant dind't DNP this round
+				relative_ranks[ep - 1] = 1 - (this["rank" + ep] - 1) / (rr_contestants[ep] - 1);
+				rr_sum += relative_ranks[ep - 1]
+			}
 		}
 		this.rr_sum = rr_sum;
 	}
