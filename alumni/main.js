@@ -17,6 +17,9 @@ function add_prediction(author, as_of, prediction){
 			}
 		} else if (candidates.length > 1) {
 			console.log("There are " + candidates.length + " contestants with name starting with " + target + "!");
+			for (let j = 0; j < candidates.length; j++){
+				console.log(candidates[j]);
+			}
 		} else {
 			result.push(candidates[0]);
 		}
@@ -31,6 +34,29 @@ add_prediction("LemonVenom", "5B", ["4DJ","Purplegaze","scorb","sicto","Srim","X
 
 add_prediction("aaronvx", "5B", ["4DJ","Purplegaze","scorb","sicto","Srim","Xylob","Yua","#1 s","#zac","Alternav","Blue Gelatin","Catw","Charito","Dawncy","Heronix","IceK","Ironn","italic","iTeo","J_d","956761d0-e8d6-4f5b-b0d3-72fb222c05bb","JujuM","losered","milster","Naslemi","Onch","Owner of","RAMT","Shardr","Sparrowc","StealthyS","Twiggy","whitec","xXB","Yume F","Algo.00","Arnoob","Azurite","cerese","cloverp","CringeC","570f2536-86e6-4453-8280-c7d8e5f956e5","Deckardv","Funo'","garf","Gman","gmo","IMC","Juhm","mazuat","MetaC","MoltenA","Moralit","notexi","PG2K","PsychoticS","Sanjay2","Snoozingn","Tak A","taopy","thanos w","TieTie","TTGuy","X_Ry","<Px>","2 L","60mo","ACN","Adamanti","alexa.f","Algotis","Alley%","AnEp","chichi","ConvexP","CosmetiC","DatF","363f7b55-13a6-4aa6-93fe-fb187ea835ff","Gizmote","hyfin","Ixc","JayTee","Juliansl","kaisle","kitkatyj","Koopa4","Maplesk","Meowi","Mept","5696ca02-91dd-42ff-a8c2-bb5380e2b224","MrDell4","MysteriousGrimR","nlcd","noef","Paintsp","Phant0","recc","SinisterS","Swimsw","Thane","TheMightyMidge","tr_","Valeburger","Xes","Zaff","aaronvx","avocadoe","awepi","bfboh","Darrest","Davoid","elevatorz","figgyc","fryuaj","GreenTree","MedioL","spooky.","thenamesh","Truttle1","Zettex","96 L","BestKP","FishOnT","iRDM","Leopardsun","Nonexistential","PlasmicT","Trenerd"]);
 
+
+add_prediction("Pink man", "6B",
+[
+"4DJ", "Purplegaze", "scorb", "Yuak", "#za", "Charito", "iTeo", "956761d0-e8d6-4f5b-b0d3-72fb222c05bb", "John D", "sicto", "Srim", "Twigg", "whitecyc", "Xylob", "#1 s", /*"#zac", */"$Ee", "BubbleTii", "Catw", "Cohaki",
+"Cpink", "570f2536-86e6-4453-8280-c7d8e5f956e5", "Donut C", "GrayThe", "IceKeyH", "indoorf", "italic1", "J_d", "JujuM", "losered", "milster08", "namdoy", "Owner o", "PaniniP", "pfysche", "Pink m", "Sparrowcat", "the op b", "Water C", "X_R",
+"xXB", "YoshiA", "cloverp", "Deckardv", "Juhm", "Juliansl", "Lyrical T", "5696ca02-91dd-42ff-a8c2-bb5380e2b224", "MineF", "Naslemi", "nlcd", "One N", "oxii", "Paints", "PengiQ", "PG2K", "recc", "Snoozingn", "stone b", "Talinlol",
+"taopy", "ThatPerson", "TieTie", "TrainGo", "TTGu", "2 L", "aaronvx","Alley%", "Brandy?", "chichi", "DerM", "363f7b55-13a6-4aa6-93fe-fb187ea835ff", "GreenieG", "GreenT", "Kaestra", "Koopa4", "7149d1d9-d34e-4af9-aed5-992f90c4bbd6", "NorthEastB", "RiccoB", "spooky.",
+"Thane", "tr_", "Wilm", "Xes", "\"Dan.", "ACN", "cheezdoo", "Deficie", "FishO", "ilo ", "Meln", "MysteriousG", "ramen powder", "Strawburr", "terminateds", "Wildz", "96 L", "figgyc", "PlasmicT", "alexlion"
+]);
+
+add_prediction("hydrogencitrus", "7B",
+[
+"4DJ", "Purplegaze", "Xyloba", "956761d0-e8d6-4f5b-b0d3-72fb222c05bb", "Yuak", "scorb", "whitecy", "losered", "570f2536-86e6-4453-8280-c7d8e5f956e5", "namdoy",
+"Twigg", "#za", "Srim", /*"Srim",*/ "ShadowF", "sicto", "John D", "X_R", "Snoozingn", "CringeC",
+"ThatPerson", "#1 s", "Sparrowc", "italic177", "Arnoob", "Moralitea", "Yume F", "thanos w", "milster08", "Catw",
+"$Eev", "RAMT", "iTe", "Cohaki", "Heronix", "xXB", "Cube4", "Gman", "YoshiAw", "TieTie",
+"ecf2bba0-4cc1-4efd-9403-a1152050c32f", "aaronv", "5696ca02-91dd-42ff-a8c2-bb5380e2b224", "Juhm", "Juliansl", "Nerdy G", "Gizmote", "PengiQ", "cloverp", "TTGu",
+"puzzlypugzl", "363f7b55-13a6-4aa6-93fe-fb187ea835ff", "Tak A", "Naslemi J", "cerese",  "smoov22", "9facbd1b-7f26-4f96-8076-2a48819627a1", "GreenT", "StealthyS", "IntersectingP", 
+"hyfin", "MrDe", "ThePinkB", "EeveeL", "Verigo", "Hunter J", "LemonV", "Skippery", "stone bone", "normalb",
+"Mept", "The Ilu", "taopy", "hamburgerhelp", "AnEpik", "FishO", "terminateds", "Zett", "BFBFan5", "spooky.",
+"Niho", "Magnetty", "Alley%", "noef", "BOWLE", "7149d1d9-d34e-4af9-aed5-992f90c4bbd6", "7993b578-5696-44ad-a28a-dbc84aac5bef", "PriceTagF", "Leopards", "Zayv",
+"girlbossed.", "Alternav", "SaddleB", "PlasmicT", "figgyc", "Wenyu", "hydrogenc", "minordill", "qoo", "96 L"
+]);
 
 color_list = [
 "#D7C6C6",

@@ -34,7 +34,7 @@ Happy predicting! You can ask me (la rivbi) for any questions.
 `);
 
 let contestants = contestants_master.filter((c) => (c.get_current_lives() > 0));
-let max_lives = 8;
+let max_lives = 9;
 
 let response_cell = [];
 
@@ -88,7 +88,7 @@ for(let i = 0; i < contestants.length; i++){
 	if(contestants[i] != undefined){
 		let c = contestants[i];
 		relative_ranks = [];
-		rr_contestants = [0, 16607, 8623, 8062, 5626, 4016, 2767];
+		rr_contestants = [0, 16607, 8623, 8062, 5626, 4016, 2767, 2152];
 		rr_sum = 0
 		for (let ep = 1; ep <= total_eps; ep++){
 			relative_ranks[ep - 1] = 1 - (c["rank" + ep] - 1) / (rr_contestants[ep] - 1);
