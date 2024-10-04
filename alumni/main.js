@@ -58,6 +58,20 @@ add_prediction("hydrogencitrus", "7B",
 "girlbossed.", "Alternav", "SaddleB", "PlasmicT", "figgyc", "Wenyu", "hydrogenc", "minordill", "qoo", "96 L"
 ]);
 
+add_prediction("iRDM", "7B",
+[
+"Xylob", "Snoozingn", "Purplegaze", "thanos", "TieT", "terminateds", "iRDM", "Owner o", "whitecyc", "losered",
+"CringeC", "RAMT", "PlasmicT", "iTeo", "scorb", "John D", "Cohak", "Cpi", "Niho", "Koopa4",
+"MrShr", "ThePinkB", "Unofficial S", "cerese", "sicto", "Catw", "Onch", "570f2536-86e6-4453-8280-c7d8e5f956e5", "#1 s", "Srim",
+"Alley%", "xtr", "Zett", "Fred S", "thenamesh", "4DJ", "AnArt", "Jakiller", "Lyrical T", "PaniniP",
+"normalb", "Reed", "WeirdK", "MeLikeP", "Ballam", "Graysan", "cashedcr", "Poop b", "SinisterS", "Meowi",
+"Yuak", "JujuM", "Mept", "Twiggy", "RyM", "Norse C", "taopy", "Flasan", "Moralit", "Blue Gel",
+"Ironnin", "Zayv", "96 L", "FishO", "figgyc", "StealthyS", "6d7b566c-ba48-4446-b5a3-d2a8552b8a69", "GreenT", "MetaCy", "Exasp",
+"abug", "mrje", "namdoy", "DatF", "MrDell4", "X_R", "Lord of the", "Dawncy", "aaronv", "Hazel C",
+"8feea67b-67f3-4a8a-8c07-e0001507665e", "xparty", "ArnoobE", "ultimate chiller", "cloverp", "Leopards", "#za", "nlcd", "DiamondSh", "RainbowK",
+"GreenieG", "Orange Cary S", "eyB", "Paintsp", "qoo", "5696ca02-91dd-42ff-a8c2-bb5380e2b224", "oxii", "Juliansl", "\"Ky", "Weny"
+]);
+
 color_list = [
 "#D7C6C6",
 "#F2D4D4",
