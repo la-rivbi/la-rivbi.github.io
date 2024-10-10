@@ -110,6 +110,33 @@ function to_str(num, decimal){
 	return (Math.round(num * (10 ** decimal)) / (10 ** decimal)).toFixed(decimal);
 }
 
+function show_contestant_data(idx){
+	let c = contestants[idx];
+	let text = "";
+	text += "Contestant Name: " + c.name + "\n";
+	text += "Contestant uuid: " + c.uuid + "\n";
+	text += "Lives as of EWOW " + total_eps + ": " + c["lives" + total_eps] + "\n";
+	for (let ep = total_eps + 1; ep <= Math.min(current_episode, c.final_ep == undefined ? 1e+30 : c.final_ep); ep++){
+		text += "EWOW " + ep + ": ";
+		if (c["rank" + ep] == "DNP"){
+			text += "DNP'd";
+			if (c["lives" + ep] < 1){
+				text += ", Eliminated";
+			} else {
+				text += " (Lives: " + c["lives" + ep] + ")";
+			}
+		}else{
+			text += "rank " + c["rank" + ep] + ", ";
+			text += c["status" + ep] +  " ";
+			if (c["lives" + ep] >= 1){
+				text += "(Lives: " + c["lives" + ep] + ")";
+			}
+		}
+		text += "\n";
+	}
+	alert(text);
+}
+
 function simulate_round () {
 	current_episode += 1;
 	// let everyone respond
@@ -147,6 +174,7 @@ function simulate_round () {
 	for (let i = 0; i < contestants.length; i++){
 		c = contestants[i];
 		let table_row = document.createElement("tr");
+		table_row.addEventListener("click", function () {show_contestant_data(i)});
 		let rank_element = document.createElement("td");
 		rank_element.appendChild(document.createTextNode(i + 1));
 		let name_element = document.createElement("td");
@@ -158,10 +186,13 @@ function simulate_round () {
 			score_text = "Eliminated R" + c.final_ep;
 		}else if(c.current_score < -100000){
 			score_text = "DNP";
-		}else if(c.alternate_score != undefined){
-			score_text = to_str(c.current_score, 4) + " (DRP: " + to_str(c.alternate_score, 4) + ")";
+			c["rank" + current_episode] = "DNP";
 		}else{
 			score_text = to_str(c.current_score, 4);
+			c["rank" + current_episode] = i + 1;
+			if(c.alternate_score != undefined){
+				score_text += " (DRP: " + to_str(c.alternate_score, 4) + ")";
+			}
 		}
 
 		score_element.appendChild(document.createTextNode(score_text));
@@ -177,14 +208,19 @@ function simulate_round () {
 				c.drp = true;
 			}
 			table_row.setAttribute("class", "prize");
+			c["status" + current_episode] = "Prized";
 		}else if(i < safe_spots){
 			// do nothing
 			table_row.setAttribute("class", "safe");
+			c["status" + current_episode] = "Survived";
 		}else{
 			c.lives -= 1;
 			table_row.setAttribute("class", "death");
 			if(c.lives == 0){
 				c["final_ep"] = current_episode;
+				c["status" + current_episode] = "Eliminated";
+			} else {
+				c["status" + current_episode] = "Lost";
 			}
 		}
 
@@ -192,6 +228,8 @@ function simulate_round () {
 		if(current_episode >= 10 && c.lives > 1) {
 			c.lives -= 1
 		}
+
+		c["lives" + current_episode] = c.lives;
 
 		table_body.append(table_row);
 		let lives_arrow = c.lives > c.prev_lives ? "\u2191 " : c.lives == c.prev_lives ? "\u2022 " : "\u2193 ";
