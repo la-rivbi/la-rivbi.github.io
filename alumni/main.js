@@ -82,6 +82,7 @@ color_list = [
 "#D3DFFF",
 "#D6D3FF",
 "#DFCAFF",
+"#EFCAFF",
 "#FFFFFF"
 ];
 
@@ -145,15 +146,12 @@ function draw_table(cmp_func){
 		contestant_row.append(favor_element)
 		for (let j = 0; j < predictions.length; j++){
 			let prediction_element = document.createElement("td");
+			prediction_element.style.backgroundColor = color_list[c["lives" + predictions[j][1].slice(0, -1)]];
 			if (predictions[j][2].includes(c)){
 				favor += 1;
-				let prediction_element = document.createElement("td");
 				prediction_element.appendChild(document.createTextNode("V"));
-				contestant_row.append(prediction_element);
-			} else {
-				let prediction_element = document.createElement("td");
-				contestant_row.append(prediction_element);
 			}
+			contestant_row.append(prediction_element);
 		}
 		if (favor > 0){
 			favor_element.appendChild(document.createTextNode(favor));
