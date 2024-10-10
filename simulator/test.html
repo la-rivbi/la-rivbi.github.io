@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>la rivbi's EWOW Simulator</title>
+  <link href="styles.css" rel="stylesheet" />
+</head>
+
+<body>
+
+<script src="../declarations.js"></script>
+<script src="../load-master.js"></script>
+<h1>la rivbi's EWOW Simulator</h1>
+
+<h2 id="counter">Round 7</h2>
+<div class="text_center">
+<button id="next_round" type="button" class="center">Next Round</button>
+</div>
+<table class = "center">
+  <thead>
+    <tr>
+      <th scope="col">Rank</th>
+      <th scope="col">Name</th>
+      <th scope="col">Lives</th>
+      <th scope="col">Z-Score</th>
+    </tr>
+  </thead>
+  <tbody id="leaderboard">
+  </tbody>
+</table>
+
+<p class="text_center">
+This simulation assumes that a contestant's <a href="https://en.wikipedia.org/wiki/Standard_score">Z-score</a> performance follows a normal distribution.
+<br>
+I don't use NR or SR because it produces performances above 100% or below 0%, which doesn't make sense.
+</p>
+
+
+<script src="main.js"></script>
+
+</body>
+</html>
