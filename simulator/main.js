@@ -52,9 +52,29 @@ function get_rank_rep(c, current_ep){
 	return result;
 }
 
+color_list = [
+"#D7C6C6",
+"#F2D4D4",
+"#F4EBCA",
+"#D4F2D7",
+"#D2F3FB",
+"#D1E9FF",
+"#D3DFFF",
+"#D6D3FF",
+"#DFCAFF",
+"#EFCAFF",
+"#FFFFFF"
+];
+
+function to_str(num, decimal){
+	return (Math.round(num * (10 ** decimal)) / (10 ** decimal)).toFixed(decimal);
+}
+
 function reset_simulation(){
 	contestants = JSON.parse(JSON.stringify(contestants_master.filter((c) => (c.get_current_lives() > 0))));
 	contestants.sort((a, b) => (get_rank_rep(a, total_eps) < get_rank_rep(b, total_eps)) ? -1 : 1);
+    let table_body = document.getElementById("leaderboard");
+    table_body.textContent = "";
 	for (let i = 0; i < contestants.length; i++){
 		let c = contestants[i];
 		let dnp_count = 0;
@@ -81,33 +101,40 @@ function reset_simulation(){
 		c["dnp_rate"] = dnp_count / total_eps;
 		c["prev_lives"] = c["lives" + total_eps];
 		c["lives"] = c["lives" + total_eps];
+		c.responses = 1;
 	}
 	current_episode = total_eps;
 	life_cap = 10;
+	// draw the current leaderboard
+	for (let i = 0; i < contestants.length; i++){
+		c = contestants[i];
+		let table_row = document.createElement("tr");
+		table_row.addEventListener("click", function () {show_contestant_data(i)});
+		let rank_element = document.createElement("td");
+		rank_element.appendChild(document.createTextNode(i + 1));
+		let name_element = document.createElement("td");
+		name_element.appendChild(document.createTextNode(c.name));
+		let lives_element = document.createElement("td");
+		lives_element.appendChild(document.createTextNode(c["lives" + total_eps]));
+		let score_element = document.createElement("td");
+		score_element.appendChild(document.createTextNode(c["rank" + total_eps] > rr_contestants[total_eps] ? "DNP" : to_str(c["sigma" + total_eps], 4)));
+		lives_element.style.backgroundColor = color_list[c.lives];
+		if(i < prize_ranks[total_eps]){
+			table_row.setAttribute("class", "prize");
+		}else if(i < safe_ranks[total_eps]){
+			table_row.setAttribute("class", "safe");
+		}else{
+			table_row.setAttribute("class", "death");
+		}
+		table_row.append(rank_element, name_element, lives_element, score_element);
+		table_body.append(table_row);
+	}
 }
 
 reset_simulation();
 
-color_list = [
-"#D7C6C6",
-"#F2D4D4",
-"#F4EBCA",
-"#D4F2D7",
-"#D2F3FB",
-"#D1E9FF",
-"#D3DFFF",
-"#D6D3FF",
-"#DFCAFF",
-"#EFCAFF",
-"#FFFFFF"
-];
-
 function z_to_pertentile(z){
 	// TODO
-}
-
-function to_str(num, decimal){
-	return (Math.round(num * (10 ** decimal)) / (10 ** decimal)).toFixed(decimal);
 }
 
 function show_contestant_data(idx){
@@ -150,23 +177,21 @@ function simulate_round () {
 			c["current_score"] = -1e+30;
 			alive_count += 1;
 		} else {
-			if(c.drp){
-				let score1 = random_gaussian(c.mean, c.stdev);
-				let score2 = random_gaussian(c.mean, c.stdev);
-				c["current_score"] = Math.max(score1, score2);
-				c["alternate_score"] = Math.min(score1, score2);
-				c.drp = false;
-			}else{
-				c["current_score"] = random_gaussian(c.mean, c.stdev);
-				c["alternate_score"] = undefined;
+			let scores = [];
+			for (let r = 0; r < c.responses; r++){
+				scores.push(random_gaussian(c.mean, c.stdev));
 			}
+			scores.sort((a, b) => b-a);
+			c["current_score"] = scores[0];
+			c["drp_score"] = scores[1];
+			c["trp_score"] = scores[2];
 			response_count += 1;
 			alive_count += 1;
 		}
 	}
 	contestants.sort((a, b) => b.current_score - a.current_score);
 	let prize_spots = Math.round(response_count * 0.05);
-	let safe_spots = Math.round(response_count * (current_episode >= 10 ? 0.67 : 0.51));
+	let safe_spots = Math.round(response_count * (current_episode >= 10 ? 0.51 : 0.51));
     let round_title = document.getElementById("counter");
     round_title.textContent = "Round " + current_episode + ": " + response_count + "/" + alive_count + " responded";
     let table_body = document.getElementById("leaderboard");
@@ -190,14 +215,18 @@ function simulate_round () {
 		}else{
 			score_text = to_str(c.current_score, 4);
 			c["rank" + current_episode] = i + 1;
-			if(c.alternate_score != undefined){
-				score_text += " (DRP: " + to_str(c.alternate_score, 4) + ")";
+			if(c.drp_score != undefined){
+				score_text += " (DRP: " + to_str(c.drp_score, 4);
+				if(c.trp_score != undefined){
+					score_text += "; TRP: " + to_str(c.trp_score, 4) + "";
+				}
+				score_text += ")";
 			}
 		}
 
 		score_element.appendChild(document.createTextNode(score_text));
 		c.prev_lives = c.lives;
-		c.drp = false;
+		c.responses = 1;
 		if(c.prev_lives == 0){
 			table_row.setAttribute("class", "already-dead");
 		}else if(i < prize_spots){
@@ -205,7 +234,7 @@ function simulate_round () {
 				c.lives += 1;
 			}
 			if (current_episode >= 10){
-				c.drp = true;
+				c.responses += 1;
 			}
 			table_row.setAttribute("class", "prize");
 			c["status" + current_episode] = "Prized";
@@ -225,8 +254,9 @@ function simulate_round () {
 		}
 
 		// life decay
-		if(current_episode >= 10 && c.lives > 1) {
+		if(current_episode >= 10 && c.lives > 3) {
 			c.lives -= 1
+			c.responses += 1
 		}
 
 		c["lives" + current_episode] = c.lives;
@@ -238,7 +268,7 @@ function simulate_round () {
 		table_row.append(rank_element, name_element, lives_element, score_element);
 	}
 }
-simulate_round();
+//simulate_round();
 
 document.getElementById("next_round").addEventListener("click", simulate_round);
 
