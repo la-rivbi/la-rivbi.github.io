@@ -72,6 +72,18 @@ add_prediction("iRDM", "7B",
 "GreenieG", "Orange Cary S", "eyB", "Paintsp", "qoo", "5696ca02-91dd-42ff-a8c2-bb5380e2b224", "oxii", "Juliansl", "\"Ky", "Weny"
 ]);
 
+add_prediction("mazuat", "7B",
+[
+"#1 s", "4DJ", "96 L", "aaronv", "abugi", "AHumanI", "ALITL", "An Epic P", "AnEpik", "ArnoobE", "Azurite", "Blue Gela", "Brandy", "Catw", "cerese", "CloudySky",
+"cloverp", "Cohaki", "ConvexP", "CringeC", "CrowB#", "Cube4", "Cygnus", "570f2536-86e6-4453-8280-c7d8e5f956e5", "DatFatC", "Deckardv", "363f7b55-13a6-4aa6-93fe-fb187ea835ff", "Evolt", "eyBH", "FishO", "fonda1515", "FROGL",
+"Funo", "galactika", "geob", "Gizmote", "Gman", "gmo", "goobr", "GrayThe", "GreenieG", "GreenT", "HazelK", "HeartO", "Heronix", "HexaF", "horizontally spin", "IceK",
+"iRDM", "italic177", "iTeo", "Ixc", "J_d", "956761d0-e8d6-4f5b-b0d3-72fb222c05bb", "John D", "Juhm", "JujuM", "Juliansl", "Kapco", "Koopa4", "la r", "lane", "LemonV", "Leopards",
+"losered", "Lyrical T", "Maildr", "MarbleM", "mazuat", "Meowi", "Mercuri", "MetaC", "5696ca02-91dd-42ff-a8c2-bb5380e2b224", "MineFlex_B", "Moralitea", "MrDe", "Nerdy G", "Nihon", "Nindr", "nlcd",
+"noef", "notex", "Onch", "One Ni", "OveCZ", "Paints", "PaniniP", "PengiQ", "PlasmicT", "PriceT", "Purplegaze", "Radio_", "RainbowK", "RAMT", "RetroCr", "Ryan ST",
+"s.eptem", "scorb", "sicto", "SinisterS", "Slimb", "smoov2", "Snoozingn", "SooperH", "Sparrowc", "Srim", "StealthyS", "Suit Q", "taopy", "Tardist", "terminateds", "Tetrian22",
+"thanos w", "ThatSh", "The Ilu", "the op ", "thenamesh", "ThePinkB", "TieTie", "tr_", "Twiggy", "whitecyc", "X_Ry", "xXB", "Xylob", "YellowE", "YoshiA", "Yuakim"
+]);
+
 color_list = [
 "#D7C6C6",
 "#F2D4D4",
