@@ -84,6 +84,19 @@ add_prediction("mazuat", "7B",
 "thanos w", "ThatSh", "The Ilu", "the op ", "thenamesh", "ThePinkB", "TieTie", "tr_", "Twiggy", "whitecyc", "X_Ry", "xXB", "Xylob", "YellowE", "YoshiA", "Yuakim"
 ]);
 
+add_prediction("Catworld", "7B",
+[
+"#1 s", "#z", "$Ee", "4DJ", "aaronv", "ALITL", "Alternav", "ArnoobE", "Blue Gelatin", "Catw",
+"cerese", "Charito", "CloudySkyes", "cloverp", "Cohaki", "CringeC", "Cygnus", "570f2536-86e6-4453-8280-c7d8e5f956e5", "Deckardv", "Dumb S",
+"ElevenWordsOfWow", "Exhalexa", "FishOnT", "FROGL", "Funo'", "galactika", "garf", "GreenieG", "ecf2bba0-4cc1-4efd-9403-a1152050c32f", "hyfin",
+"IceKeyH", "IntersectingP", "iRDM", "italic1", "iTeo", "J_d", "956761d0-e8d6-4f5b-b0d3-72fb222c05bb", "Jakiller", "John D", "Jooj",
+"Juhm", "JujuM", "Kiwiyum", "Koopa4", "la r", "losered", "Lyrical T", "9facbd1b-7f26-4f96-8076-2a48819627a1", "mazuat", "Meowi",
+"Mept", "5696ca02-91dd-42ff-a8c2-bb5380e2b224", "Mikl P", "milster08", "MineFlex_B", "MoonMa", "Moralitea", "namdoy", "Nerdy G", "nlcd",
+"Onch", "Owner of the P", "oxii", "PaniniP", "Parallel Paper", "PengiQ", "pfysche", "Purplegaze", "RainbowK", "RAMT",
+"Ryan ST", "s.ep", "scorb", "ShadowF", "Shorky", "sicto", "SinisterS", "smoov22", "Snoozingn", "Sparrowc",
+"spooky.p", "Srim", "St4rr", "StealthyS", "Tak A", "thanos w", "ThatPerson", "the op b", "ThePinkB", "TieTie", "TrainGoB", "Twiggy", "Twisted T", "Water Ch", "whitecyc", "Wilma", "X_Ry", "xXB", "Xyloba", "Yuakim"
+]);
+
 color_list = [
 "#D7C6C6",
 "#F2D4D4",
