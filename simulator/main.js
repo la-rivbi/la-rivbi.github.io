@@ -18,6 +18,32 @@ function random_gaussian(mean, stdev) {
 	return mean + stdev * z;
 }
 
+function get_mean(list) {
+	let total = 0;
+	for (let i = 0; i < list.length; i++){
+		total += list[i];
+	}
+	return total / list.length ;
+}
+
+function get_stdev(list) {
+	let sq_error = 0;
+	let mean = get_mean(list);
+	for (let i = 0; i < list.length; i++){
+		sq_error += Math.pow(list[i] - mean, 2);
+	}
+	return Math.sqrt( sq_error / (list.length - 1));
+}
+
+function get_pstdev(list) {
+	let sq_error = 0;
+	let mean = get_mean(list);
+	for (let i = 0; i < list.length; i++){
+		sq_error += Math.pow(list[i] - mean, 2);
+	}
+	return Math.sqrt( sq_error / list.length);
+}
+
 let contestants = [];
 let current_episode = total_eps + 1;
 let life_cap = 100;
@@ -70,6 +96,30 @@ function to_str(num, decimal){
 	return (Math.round(num * (10 ** decimal)) / (10 ** decimal)).toFixed(decimal);
 }
 
+function to_performance_str(num) {
+	if (method_select.value == "z-score gauss"){
+		return to_str(num, 4);
+	} else if (method_select.value == "average beta") {
+		return to_str(num * 100, 2) + "%";
+	}
+}
+
+let get_performance = (c => random_gaussian(c.mean, c.stdev));
+
+let method_select = document.getElementById("method_select");
+method_select.addEventListener("change", set_method);
+function set_method(){
+	if (method_select.value == "z-score gauss") {
+		get_performance = (c => random_gaussian(c.mean, c.stdev));
+		document.getElementById("performance").innerText = "Z-Score";
+	} else if (method_select.value == "average beta"){
+		get_performance = (c => jStat.beta.sample(c.alpha, c.beta));
+		document.getElementById("performance").innerText = "Raw Score";
+	}
+	reset_simulation();
+}
+
+
 function reset_simulation(){
 	contestants = JSON.parse(JSON.stringify(contestants_master.filter((c) => (c.get_current_lives() > 0))));
 	contestants.sort((a, b) => (get_rank_rep(a, total_eps) < get_rank_rep(b, total_eps)) ? -1 : 1);
@@ -79,6 +129,7 @@ function reset_simulation(){
 		let c = contestants[i];
 		let dnp_count = 0;
 		let sigma_sum = 0.0;
+		c["averages"] = [];
 		for (let ep = 1; ep <= total_eps; ep++){
 			if(c["rank" + ep] == rr_contestants[ep] + 1){ // the contestant DNP'd this round
 				dnp_count += 1
@@ -86,6 +137,7 @@ function reset_simulation(){
 			}else{
 				c["sigma" + ep] = (c["average" + ep] - round_mean[ep]) / round_stdevp[ep];
 				sigma_sum += c["sigma" + ep];
+				c.averages.push(c["average" + ep]);
 			}
 		}
 		c["mean"] = sigma_sum / (total_eps - dnp_count);
@@ -101,6 +153,10 @@ function reset_simulation(){
 		c["dnp_rate"] = dnp_count / total_eps;
 		c["prev_lives"] = c["lives" + total_eps];
 		c["lives"] = c["lives" + total_eps];
+		c["average_mean"] = get_mean(c.averages);
+		c["average_stdev"] = get_stdev(c.averages);
+		c["alpha"] = ((1 - c.average_mean) / Math.pow(c.average_stdev, 2) - 1 / c.average_mean) * Math.pow(c.average_mean, 2);
+		c["beta"] = c.alpha * (1 / c.average_mean - 1)
 		c.responses = 1;
 	}
 	current_episode = total_eps;
@@ -117,7 +173,15 @@ function reset_simulation(){
 		let lives_element = document.createElement("td");
 		lives_element.appendChild(document.createTextNode(c["lives" + total_eps]));
 		let score_element = document.createElement("td");
-		score_element.appendChild(document.createTextNode(c["rank" + total_eps] > rr_contestants[total_eps] ? "DNP" : to_str(c["sigma" + total_eps], 4)));
+		let score_text = "DNP";
+		if (c["rank" + total_eps] <= rr_contestants[total_eps]){
+			if (method_select.value == "z-score gauss"){
+				score_text = to_str(c["sigma" + total_eps], 4);
+			} else if (method_select.value == "average beta"){
+				score_text = to_str(100 * c["average" + total_eps], 2) + "%";
+			}
+		}
+		score_element.appendChild(document.createTextNode(score_text));
 		lives_element.style.backgroundColor = color_list[c.lives];
 		if(i < prize_ranks[total_eps]){
 			table_row.setAttribute("class", "prize");
@@ -179,7 +243,7 @@ function simulate_round () {
 		} else {
 			let scores = [];
 			for (let r = 0; r < c.responses; r++){
-				scores.push(random_gaussian(c.mean, c.stdev));
+				scores.push(get_performance(c));
 			}
 			scores.sort((a, b) => b-a);
 			c["current_score"] = scores[0];
@@ -213,12 +277,12 @@ function simulate_round () {
 			score_text = "DNP";
 			c["rank" + current_episode] = "DNP";
 		}else{
-			score_text = to_str(c.current_score, 4);
+			score_text = to_performance_str(c.current_score);
 			c["rank" + current_episode] = i + 1;
 			if(c.drp_score != undefined){
-				score_text += " (DRP: " + to_str(c.drp_score, 4);
+				score_text += " (DRP: " + to_performance_str(c.drp_score);
 				if(c.trp_score != undefined){
-					score_text += "; TRP: " + to_str(c.trp_score, 4) + "";
+					score_text += "; TRP: " + to_performance_str(c.trp_score) + "";
 				}
 				score_text += ")";
 			}
