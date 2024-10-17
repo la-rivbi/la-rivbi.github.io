@@ -96,25 +96,44 @@ function to_str(num, decimal){
 	return (Math.round(num * (10 ** decimal)) / (10 ** decimal)).toFixed(decimal);
 }
 
+let basis = "z-score";
+let distribution = "gauss";
+
 function to_performance_str(num) {
-	if (method_select.value == "z-score gauss"){
+	if (basis == "z-score"){
 		return to_str(num, 4);
-	} else if (method_select.value == "average beta") {
+	} else {
 		return to_str(num * 100, 2) + "%";
 	}
 }
 
 let get_performance = (c => random_gaussian(c.mean, c.stdev));
 
-let method_select = document.getElementById("method_select");
-method_select.addEventListener("change", set_method);
+let basis_select = document.getElementById("basis_select");
+let distribution_select = document.getElementById("distribution_select");
+basis_select.addEventListener("change", set_method);
+distribution_select.addEventListener("change", set_method);
 function set_method(){
-	if (method_select.value == "z-score gauss") {
+	basis = basis_select.value;
+	distribution = distribution_select.value;
+	if (distribution == "beta" && basis == "z-score") {
+		alert("Beta distribution doesn't work on Z-scores!");
+		distribution_select.selectedIndex = 0;
+		distribution = "gauss";
+	}
+	if (distribution == "gauss"){
 		get_performance = (c => random_gaussian(c.mean, c.stdev));
-		document.getElementById("performance").innerText = "Z-Score";
-	} else if (method_select.value == "average beta"){
+	} else if (distribution == "beta"){
 		get_performance = (c => jStat.beta.sample(c.alpha, c.beta));
+	}
+	if (basis == "z-score") {
+		document.getElementById("performance").innerText = "Z-Score";
+	} else if (basis == "average"){
 		document.getElementById("performance").innerText = "Raw Score";
+	} else if (basis == "rr"){
+		document.getElementById("performance").innerText = "Relative Rank";
+	} else if (basis == "sr"){
+		document.getElementById("performance").innerText = "Standardized Rank";
 	}
 	reset_simulation();
 }
@@ -129,39 +148,31 @@ function reset_simulation(){
 		let c = contestants[i];
 		let dnp_count = 0;
 		let sigma_sum = 0.0;
-		c["averages"] = [];
+		c["performances"] = [];
 		for (let ep = 1; ep <= total_eps; ep++){
 			if(c["rank" + ep] == rr_contestants[ep] + 1){ // the contestant DNP'd this round
 				dnp_count += 1
-				c["sigma" + ep] = Math.NaN;
+				c["z-score" + ep] = Math.NaN;
+				c["sr" + ep] = Math.NaN;
 			}else{
-				c["sigma" + ep] = (c["average" + ep] - round_mean[ep]) / round_stdevp[ep];
-				sigma_sum += c["sigma" + ep];
-				c.averages.push(c["average" + ep]);
+				c["z-score" + ep] = (c["average" + ep] - round_mean[ep]) / round_stdevp[ep];
+				c["sr" + ep] = 0.5 * (1 + erf(c["z-score" + ep]) / Math.sqrt(2));
+				c["performances"].push(c[basis + ep]);
 			}
 		}
-		c["mean"] = sigma_sum / (total_eps - dnp_count);
-		let sq_error = 0;
-		for (let ep = 1; ep <= total_eps; ep++){
-			if(c["rank" + ep] == rr_contestants[ep] + 1){ // the contestant DNP'd this round
-				// do nothing
-			}else{
-				sq_error += Math.pow(c["sigma" + ep] - c.mean, 2);
-			}
-		}
-		c["stdev"] = Math.sqrt(sq_error / (total_eps - dnp_count - 1));
 		c["dnp_rate"] = dnp_count / total_eps;
 		c["prev_lives"] = c["lives" + total_eps];
 		c["lives"] = c["lives" + total_eps];
-		c["average_mean"] = get_mean(c.averages);
-		c["average_stdev"] = get_stdev(c.averages);
-		c["alpha"] = ((1 - c.average_mean) / Math.pow(c.average_stdev, 2) - 1 / c.average_mean) * Math.pow(c.average_mean, 2);
-		c["beta"] = c.alpha * (1 / c.average_mean - 1)
+		c["mean"] = get_mean(c.performances);
+		c["stdev"] = get_stdev(c.performances);
+		c["alpha"] = ((1 - c.mean) / Math.pow(c.stdev, 2) - 1 / c.mean) * Math.pow(c.mean, 2);
+		c["beta"] = c.alpha * (1 / c.mean - 1)
 		c.responses = 1;
 	}
 	current_episode = total_eps;
 	life_cap = 10;
 	// draw the current leaderboard
+	document.getElementById("counter").innerText = "Round " + total_eps + ": " + contestants.length + " remain";
 	for (let i = 0; i < contestants.length; i++){
 		c = contestants[i];
 		let table_row = document.createElement("tr");
@@ -175,11 +186,7 @@ function reset_simulation(){
 		let score_element = document.createElement("td");
 		let score_text = "DNP";
 		if (c["rank" + total_eps] <= rr_contestants[total_eps]){
-			if (method_select.value == "z-score gauss"){
-				score_text = to_str(c["sigma" + total_eps], 4);
-			} else if (method_select.value == "average beta"){
-				score_text = to_str(100 * c["average" + total_eps], 2) + "%";
-			}
+			score_text = to_performance_str(c[basis + total_eps]);
 		}
 		score_element.appendChild(document.createTextNode(score_text));
 		lives_element.style.backgroundColor = color_list[c.lives];

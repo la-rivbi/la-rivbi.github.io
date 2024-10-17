@@ -15,9 +15,16 @@
 
 <p class="text_center">
   Select the basis of simulation: 
-  <select id="method_select">
-    <option selected value="z-score gauss">Gaussian on Z-score</option>
-    <option value="average beta">Beta on average percentile</option>
+  <select id="distribution_select">
+    <option selected value="gauss">Gaussian</option>
+    <option value="beta">Beta</option>
+  </select>
+  on 
+  <select id="basis_select">
+    <option selected value="z-score">Z-score</option>
+    <option value="average">average percentile</option>
+    <option value="rr">relative rank</option>
+    <option value="sr">standardized rank</option>
   </select>
 </p>
 
