@@ -156,7 +156,7 @@ function reset_simulation(){
 				c["sr" + ep] = Math.NaN;
 			}else{
 				c["z-score" + ep] = (c["average" + ep] - round_mean[ep]) / round_stdevp[ep];
-				c["sr" + ep] = 0.5 * (1 + erf(c["z-score" + ep]) / Math.sqrt(2));
+				c["sr" + ep] = 0.5 * (1 + erf(c["z-score" + ep] / Math.sqrt(2)));
 				c["performances"].push(c[basis + ep]);
 			}
 		}
