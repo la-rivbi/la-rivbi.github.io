@@ -150,7 +150,7 @@ function reset_simulation(){
 		let sigma_sum = 0.0;
 		c["performances"] = [];
 		for (let ep = 1; ep <= total_eps; ep++){
-			if(c["rank" + ep] == rr_contestants[ep] + 1){ // the contestant DNP'd this round
+			if(c["rank" + ep] >= rr_contestants[ep] + 1){ // the contestant DNP'd this round
 				dnp_count += 1
 				c["z-score" + ep] = Math.NaN;
 				c["sr" + ep] = Math.NaN;
