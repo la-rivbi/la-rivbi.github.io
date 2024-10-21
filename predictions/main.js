@@ -88,7 +88,7 @@ for(let i = 0; i < contestants.length; i++){
 	if(contestants[i] != undefined){
 		let c = contestants[i];
 		relative_ranks = [];
-		rr_contestants = [0, 16607, 8623, 8062, 5626, 4016, 2767, 2152];
+		rr_contestants = [0, 16607, 8623, 8062, 5626, 4016, 2767, 2152, 1479];
 		rr_sum = 0
 		for (let ep = 1; ep <= total_eps; ep++){
 			relative_ranks[ep - 1] = 1 - (c["rank" + ep] - 1) / (rr_contestants[ep] - 1);
@@ -99,7 +99,7 @@ for(let i = 0; i < contestants.length; i++){
 			c.seedbase = 4300 + Math.max(0, (rr_sum - total_eps + 2) * 250 * 5 / total_eps);
 		}else{
 			seed_1 = c.get_current_lives() * 1000 // by lifes
-			seed_2 = 4300 + Math.min(relative_ranks[0] * 100 + relative_ranks[1] * 100 - 190, 0) * 50;
+			seed_2 = 4300 + Math.min(relative_ranks[0] * 100 + relative_ranks[1] * 100 + relative_ranks[2] * 100 - 290, 0) * 50;
 			if(relative_ranks.at(-2) < 0){ // don't consider it if the contestant dnp'd at least twice
 				seed_2 = 0
 			}
