@@ -116,6 +116,27 @@ add_prediction("misch13vous", "8B",
 "X_Ry", "xXB", "Xyloba", "Yuakim", "Zaffr", "Zettex", "Zixi"
 ]);
 
+add_prediction("Pink man", "8B",
+[
+"4DJ", "scorb", "956761d0-e8d6-4f5b-b0d3-72fb222c05bb", "losered",
+"Purplegaze", "sicto", "Srim", "Twiggy", "whitecyc", "Xylob",
+"Yuak", "#1 s", "#za", "570f2536-86e6-4453-8280-c7d8e5f956e5",
+"J_d", "John D", "Owner of the P", "xXB", "X_R", 
+"Catw", "Charito", "CookieCrisp", "Deckardv", "363f7b55-13a6-4aa6-93fe-fb187ea835ff", "Evolt", "Gman", "IceKeyH", "JujuM", "Lyrical Ty",
+"5696ca02-91dd-42ff-a8c2-bb5380e2b224", "milster", "MineF", 
+"Nerdy G", "PaniniP", "PoliteCh", "Shorky", "ThatPerson",
+"TieTie", "$Ee", "aaronv", "AnEp", "cashedcred", "cloverpep",
+"Cpink", "DatH", "Donut Cor", "Fred Som", "garf", "Gizmote", 
+"Gordisch", "ecf2bba0-4cc1-4efd-9403-a1152050c32f", "Juhm", "Julians", "Koopa4", "LemonV",
+"9facbd1b-7f26-4f96-8076-2a48819627a1", "pokeysoda", "puzzlypug", "Tak A", "ThePinkB", "TTGu",
+"avocadoe", "Bo T", "DarcyD", "Eric from r", "FROGLOCK",
+"Graysa", "GrayTheS", "GreenT", "Nick Whi", "nlcd", "NorthEastB",
+"s837", "stone bone", "taopy", "terminatedsl", "tr_", "2 L",
+"Alias.E", "Alley%", "Brandy?", "Defic", "dustox", "exxpir",
+"funnydoggg", "7149d1d9-d34e-4af9-aed5-992f90c4bbd6", "noef", "PlasmicT", "RiccoB",
+"Sbarb", "Zettex", "figgyc", "OL T", "Strawburr", "alexlion0"
+]);
+
 color_list = [
 "#D7C6C6",
 "#F2D4D4",
