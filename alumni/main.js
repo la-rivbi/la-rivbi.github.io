@@ -134,7 +134,8 @@ add_prediction("Pink man", "8B",
 "s837", "stone bone", "taopy", "terminatedsl", "tr_", "2 L",
 "Alias.E", "Alley%", "Brandy?", "Defic", "dustox", "exxpir",
 "funnydoggg", "7149d1d9-d34e-4af9-aed5-992f90c4bbd6", "noef", "PlasmicT", "RiccoB",
-"Sbarb", "Zettex", "figgyc", "OL T", "Strawburr", "alexlion0"
+"Sbarb", "Zettex", "figgyc", "OL T", "Strawburr", "alexlion0",
+"Snoozingn", "iTeo", "YellowE", "FishOnT", "spooky."
 ]);
 
 color_list = [
