@@ -138,6 +138,123 @@ add_prediction("Pink man", "8B",
 "Snoozingn", "iTeo", "YellowE", "FishOnT", "spooky."
 ]);
 
+/*
+add_prediction("Trojan", "8B",
+[
+"‘Crafty :3’",
+"\"Dan.",
+"1Gary",
+"8th",
+"A Random EWOW Contestant",
+"Account_Alt",
+"Adamanti",
+"Allymote",
+"Among Us Enjoyer",
+"Avanfan",
+"axn",
+"Azim9999",
+"Azuran",
+"BeanutPutter",
+"bladny",
+"Bridgette TDI",
+"d177ad18-680d-410b-b4c8-a5caa84c2ab9",
+"06cf515c-6eb8-43a0-9105-534febedc0db",
+"cat copnt",
+"Cerisewyyy?",
+"COCOATWIX",
+"Cpt. Mono",
+"CreepingCretinousCreature",
+"DaveLikesGames",
+"DesertYou",
+"Detective Chiyo",
+"Devils Planner",
+"dominoexists",
+"Dork Matter",
+"Dulcyd",
+"Eagle Master",
+"Em648",
+"845f3879-3567-4316-826c-48d3f2ebf29e",
+"eviled",
+"fidget boii",
+"f4f4a25c-9cc9-4977-8167-6fa984c9f72e",
+"Flower Radio",
+"FordF150",
+"GameonHead",
+"Gaming YT",
+"Ghostie Q",
+"gibby flibby",
+"Golf Ball",
+"7c6ced9f-c239-4404-968d-abe00547b83d",
+"googifloop",
+"GordonBrown2318",
+"Gravel",
+"Gummy Pikmin Productions",
+"hamburgerlord",
+"High Concept",
+"horizontally spinning rat",
+"HyundaiElantra",
+"ideot",
+"Jaden73147",
+"Josh / NOT a gaming channel",
+"Juliansl",
+"Kanye West",
+"lane",
+"Larry The Lobster",
+"MargaretThatcher11208",
+"e633b8b3-2f2b-4217-90f1-5c322e00ce82",
+"7149d1d9-d34e-4af9-aed5-992f90c4bbd6",
+"minekylemania",
+"Mini Gumballed Ice Cube",
+"minordill",
+"Nailed It!",
+"Nebbulz",
+"NostalgicFeels",
+"Nurse Cheese",
+"Patrick Star",
+"a5561308-53d3-4ed4-bf9a-947b732462e4",
+"Phantastrophy",
+"Pink man",
+"Purps Got A Ways To Go",
+"qooyuni",
+"Quagsire King",
+"Ratatouille from Ratatouille",
+"Riley",
+"d925ff6b-60e1-47d5-963b-7e98fda95b1f",
+"rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
+"Sausiiie",
+"907b8cf4-e6b4-4864-9941-0187d4a61d7a",
+"SeahawkzSK",
+"Some Guy",
+"spinifex",
+"a5954364-d58e-4c04-9ae1-213be6f7918a",
+"Stickly Stories",
+"Supermersion",
+"superminerJG",
+"Swimswum",
+"Tantusar",
+"1de8de11-5234-48f6-a392-3d70618845bd",
+"Teenage Wasteland",
+"The Exact Amount",
+"857c9932-a579-4efc-ade3-a01f7cfc9ff0",
+"The Supervillain",
+"Tomgazery",
+"Violence",
+"widetide",
+"Yooper Mapping"
+]);
+*/
+
+for (let i = 0; i < contestants.length; i++){
+	let c = contestants[i];
+	let favor = 0;
+	for (let j = 0; j < predictions.length; j++){
+		if (predictions[j][2].includes(c)){
+			favor += 1;
+		}
+	}
+	c.favor = favor;
+}
+
 color_list = [
 "#D7C6C6",
 "#F2D4D4",
@@ -161,17 +278,17 @@ table_head.append(table_secondrow);
 let top_element = document.createElement("th");
 top_element.appendChild(document.createTextNode("Contestant"));
 top_element.setAttribute("rowspan", 2);
-top_element.addEventListener("click", function () {draw_table((a, b) => (a.name.toUpperCase() > b.name.toUpperCase()));});
+top_element.addEventListener("click", function () {draw_table((a, b) => (a.name.toUpperCase() > b.name.toUpperCase() ? 1 : (a.name.toUpperCase() < b.name.toUpperCase() ? -1 : 0)));});
 table_toprow.append(top_element)
 let status_element = document.createElement("th");
 status_element.setAttribute("rowspan", 2);
 status_element.appendChild(document.createTextNode("Lives"));
-status_element.addEventListener("click", function () {draw_table((a, b) => (a.get_current_lives() < b.get_current_lives()));});
+status_element.addEventListener("click", function () {draw_table((a, b) => (b.get_current_lives() - a.get_current_lives()));});
 table_toprow.append(status_element)
 let favor_element = document.createElement("th");
 favor_element.setAttribute("rowspan", 2);
 favor_element.appendChild(document.createTextNode("#"));
-favor_element.addEventListener("click", function () {draw_table((a, b) => (a.favor < b.favor));});
+favor_element.addEventListener("click", function () {contestants.sort((a, b) => (b.favor - a.favor)); draw();});
 table_toprow.append(favor_element)
 /*
 let blank_element1 = document.createElement("th");
@@ -186,20 +303,22 @@ for (let i = 0; i < predictions.length; i++){
 	let p = predictions[i];
 	let name_element = document.createElement("th");
 	name_element.appendChild(document.createTextNode(p[0] + " (" + p[1] + ")"));
-	name_element.addEventListener("click", function () {draw_table((a, b) => ((p[2].includes(a) ? p[2].indexOf(a) : 16608) > (p[2].includes(b) ? p[2].indexOf(b) : 16608)));});
+	name_element.addEventListener("click", function () {draw_table((a, b) => ((p[2].includes(a) ? p[2].indexOf(a) : 16608) - (p[2].includes(b) ? p[2].indexOf(b) : 16608)));});
 	table_toprow.append(name_element)
 	let count_element = document.createElement("th");
 	count_element.appendChild(document.createTextNode(p[2].length));
-	count_element.addEventListener("click", function () {draw_table((a, b) => ((p[2].includes(a) ? p[2].indexOf(a) : 16608) > (p[2].includes(b) ? p[2].indexOf(b) : 16608)));});
+	count_element.addEventListener("click", function () {draw_table((a, b) => ((p[2].includes(a) ? p[2].indexOf(a) : 16608) - (p[2].includes(b) ? p[2].indexOf(b) : 16608)));});
 	table_secondrow.append(count_element)
 }
 
-function draw_table(cmp_func){
-	contestants.sort(cmp_func);
+function draw(){
 	table_body.innerHTML = "";
 	for (let i = 0; i < contestants.length; i++){
-		let contestant_row = document.createElement("tr");
 		let c = contestants[i];
+		if(c.favor <= 0){
+			continue;
+		}
+		let contestant_row = document.createElement("tr");
 		contestant_row.style.backgroundColor = color_list[c.get_current_lives()];
 		let name_element = document.createElement("td");
 		name_element.appendChild(document.createTextNode(c.name));
@@ -207,24 +326,26 @@ function draw_table(cmp_func){
 		let lives_element = document.createElement("td");
 		lives_element.appendChild(document.createTextNode(c.get_current_lives()));
 		contestant_row.append(lives_element)
-		let favor = 0;
 		let favor_element = document.createElement("td");
 		contestant_row.append(favor_element)
 		for (let j = 0; j < predictions.length; j++){
 			let prediction_element = document.createElement("td");
 			prediction_element.style.backgroundColor = color_list[c["lives" + predictions[j][1].slice(0, -1)]];
 			if (predictions[j][2].includes(c)){
-				favor += 1;
 				prediction_element.appendChild(document.createTextNode("V"));
 			}
 			contestant_row.append(prediction_element);
 		}
-		if (favor > 0){
-			favor_element.appendChild(document.createTextNode(favor));
+		if (c.favor > 0){
+			favor_element.appendChild(document.createTextNode(c.favor));
 			table_body.append(contestant_row);
 		}
-		c.favor = favor;
 	}
+}
+
+function draw_table(cmp_func){
+	contestants.sort(cmp_func);
+	draw();
 }
 
 draw_table((a) => 0);
