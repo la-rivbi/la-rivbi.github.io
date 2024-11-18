@@ -190,9 +190,9 @@ function reset_simulation(){
 		}
 		score_element.appendChild(document.createTextNode(score_text));
 		lives_element.style.backgroundColor = color_list[c.lives];
-		if(i < prize_ranks[total_eps]){
+		if(c["rank" + total_eps] <= prize_ranks[total_eps]){
 			table_row.setAttribute("class", "prize");
-		}else if(i < safe_ranks[total_eps]){
+		}else if(c["rank" + total_eps] <= safe_ranks[total_eps]){
 			table_row.setAttribute("class", "safe");
 		}else{
 			table_row.setAttribute("class", "death");
