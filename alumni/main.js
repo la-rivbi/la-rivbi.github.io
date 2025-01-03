@@ -483,6 +483,32 @@ add_prediction("aaronvx", "9B", [
 "Poop book",
 ]);
 
+add_prediction("LemonVenom", "10B", [
+"scorb", "losered", "4DJump", "#1 s", "Xylob", "J_d", "Purplegaz",
+"whitecyc", "Srim", "TieTie",
+"570f2536-86e6-4453-8280-c7d8e5f956e5",
+"X_Ry", "JujuM", "MineFlex_B", "xXB", "Twiggy",
+"Yuak",
+"956761d0-e8d6-4f5b-b0d3-72fb222c05bb",
+"sicto", "iTeo", 
+"5696ca02-91dd-42ff-a8c2-bb5380e2b224",
+"Deckardv", "Nerdy G", "cloverpep", "ArnoobE", "Snooz",
+"italic177", "PaniniP", "Owner of", "Koopa4", "CloudySkyes",
+"pfysche", "ThePinkB", "Catw", "MoltenA", "Cohak", "thanos w",
+"LemonVen", "goobr", "Pink man", "RAMT", "The Ilu", "Heronix",
+"YoshiAwe", "Azurite", "ConvexP", "Juhm", "la r", "aaronv",
+"Grammar ", "terminatedsl", "mazuat", "PengiQ", "Juliansl",
+"garf", "Water C", "Onch", "Meowic", "IntersectingP",
+"cashedc", "CringeC", "milster0", "Graysand", "Moralitea", "Gman",
+"Ixc", "MeLikeP", "iRDM", "recc", "Thane", "tr_", "GreenTree",
+"spooky.", "hydrogenc", "PlasmicT", "BFBFa", "Nonexistential",
+"Verigold", "Magnetty", "Alley%", "Nihon", "Lpc", "WholeN",
+"Leopards", "TheMightyM", "Syro33", 
+"5696ca02-91dd-42ff-a8c2-bb5380e2b224",
+"avocadoexists",
+"Blue Gela", "cerese", "Alternav", "Zettex", "FishO", "2 L",
+"figgyc", "thenamesh", "lipu K", "Jac4", "Kinderda", "MrDell47"
+]);
 
 for (let i = 0; i < contestants.length; i++){
 	let c = contestants[i];
