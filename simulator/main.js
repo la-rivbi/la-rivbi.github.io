@@ -167,7 +167,7 @@ function reset_simulation(){
 		c["stdev"] = get_stdev(c.performances);
 		c["alpha"] = ((1 - c.mean) / Math.pow(c.stdev, 2) - 1 / c.mean) * Math.pow(c.mean, 2);
 		c["beta"] = c.alpha * (1 / c.mean - 1)
-		c.responses = 1;
+		c.responses = c["entries" + total_eps];
 	}
 	current_episode = total_eps;
 	life_cap = 10;
