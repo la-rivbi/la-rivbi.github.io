@@ -510,6 +510,38 @@ add_prediction("LemonVenom", "10B", [
 "figgyc", "thenamesh", "lipu K", "Jac4", "Kinderda", "MrDell47"
 ]);
 
+add_prediction("ThatShowGuy", "10B", [
+"scorb",
+"4DJ", "losered",
+"#1 s", "J_d", "Purplegaze", "Srim", "whitecyc", "Xylob",
+"570f2536-86e6-4453-8280-c7d8e5f956e5",
+"iTeo", "sicto", "TieTie", "RainbowK", "xXB", "X_R", "Yuak",
+"956761d0-e8d6-4f5b-b0d3-72fb222c05bb",
+"Twiggy", "#za", "the op b",
+"Catw", "cloverp", "Cohaki", "ConvexP", 
+"363f7b55-13a6-4aa6-93fe-fb187ea835ff",
+"GreenieG",
+"5696ca02-91dd-42ff-a8c2-bb5380e2b224",
+"Owner of", "PaniniP", "Pink man", "Shorky", "thanos w", "Laurc",
+"aaronv", "CringeCat", "Grammar L", "Ixc",  "John Du", "Juhm",
+"la ", "mazuat", "Meowi", "Moralitea", 
+"e5e585d0-b084-4826-88c9-1c7392e0a337",
+"terminatedsl", "ThatPerson", "CookieCri",
+"Algotistic", "Alley%", "Anko6", "Blue Gela", "Brandy?",
+"cerese", "Chad", "Eric f", "Hazel Cr", "indoorfish", "iRDM", "Jemuon",
+"Kaestr", "Lpc", "Magnetty", "Mept", "Nihoni", "Orange Cary S",
+"PizzaEn", "PlasmicTr", "SinisterS", "Spicyman33",
+"StealthyS", "supernova16", "Syro33", "Tak ",
+"taopy", "Thane", "That Nerd A", "ThatShowG", "TheMightyM",
+"WholeN", "TTGu", "Villagers", "Yoneliu",
+"eyB", "fryuaj", "GalacticGroo", "Lord Far", "MetaCyde", "Neonth",
+"starsword g", "ToffeeL", "Zixi", "Zettex",
+"alexlion0",
+"ce28466a-f508-4d12-b224-4e7ce3ac0e57",
+"7149d1d9-d34e-4af9-aed5-992f90c4bbd6",
+"PingThaj", "pjg", "sodiumhy", "Weny"
+]);
+
 for (let i = 0; i < contestants.length; i++){
 	let c = contestants[i];
 	let favor = 0;
