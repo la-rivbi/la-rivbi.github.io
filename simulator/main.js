@@ -166,8 +166,14 @@ function reset_simulation(){
 		c["mean"] = get_mean(c.performances);
 		c["stdev"] = get_stdev(c.performances);
 		c["alpha"] = ((1 - c.mean) / Math.pow(c.stdev, 2) - 1 / c.mean) * Math.pow(c.mean, 2);
-		c["beta"] = c.alpha * (1 / c.mean - 1)
-		c.responses = c["entries" + total_eps];
+		c["beta"] = c.alpha * (1 / c.mean - 1);
+		c["responses"] = 1;
+		if (c["rank" + total_eps] <= prize_ranks[total_eps]){
+			c.responses += 1;
+		}
+		if (c["lives" + (total_eps - 1)] - ((c["rank" + total_eps] > safe_ranks[total_eps]) ? 1 : 0) > 3){
+			c.responses += 1;
+		}
 	}
 	current_episode = total_eps;
 	life_cap = 10;
